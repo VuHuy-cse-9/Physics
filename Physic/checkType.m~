@@ -1,0 +1,15 @@
+function output = checkType(distance , countPt, type)
+    sizeType = size(type(1,:));
+    sizeDistanceRow = size(distance(1,:)); %Pt and distance have same meaning matrix
+    sizeDistanceCol = size(distance(:,1));
+    for i = 1:sizeDistanceCol(1,1)
+        for j = 1:sizeDistanceRow(1,2)
+            for k=1:sizeType(1,2)
+                if (distance(i,j) == type(1,k) && countPt(i,j) == type(2,k))
+                    output(1,k) = output(1,k) + 1;
+                end
+            end
+        end
+    end
+end
+

@@ -1,0 +1,7 @@
+function sorting(type)
+    sizeType = size(Type(1,:));
+    for i= 1: sizeType(1,2)
+        for j = i
+    end
+end
+

@@ -1,0 +1,17 @@
+%Count for 3x3
+n = 3;
+load data.mat %h_coor, type 
+%Sort distance of type.
+type = sorting(type);
+
+%Calculate distance:
+output1 = caldistance(h_coor, 3); %output include all pair of distance and its label.
+
+%Eliminate pair that have distance > max or < min type's distance.
+
+
+%Count Pt.
+output2 = countPt(h_coor);
+
+%checkType
+output

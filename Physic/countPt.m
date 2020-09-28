@@ -1,0 +1,83 @@
+function output = countPt(h_coor, nlattice) %nlattice: mang thuy tinh nlatticexnlattice
+    sizehcoor = size(h_coor(1,:));
+    for i = 1:sizehcoor(1,2)
+        for j = 1:sizehcoor(1,2)
+            for k = 1:4 %1 -> 4 <=> in, top, diagonal,right point
+                x_coor = h_coor(1,j);
+                y_coor = h_coor(2,j);
+                numberOfPt = 0;
+                if (k == 2) %Top
+                    y_coor = y_coor + 2*nlattice;
+                elseif (k == 3) %Diagonal
+                    x_coor = x_coor + 2*nlattice;
+                    y_coor = y_coor + 2*nlattice;
+                elseif (k == 4) %Right
+                    x_coor = x_coor + 2*nlattice;
+                end
+                %Line equation: (x-xo)(y1-y0) = (y-y0)(x1-x0)
+                %%%%x0 < 1 + n*0.5 < x1
+                %%%%y0 < 1 + m*0.5 < y1
+                %%%%n.m e N
+                x0 = h_coor(1, i);
+                x1 = x_coor;
+                y0 = h_coor(2, i);
+                y1 = y_coor;
+                
+                if (x0 > x1) 
+                    startX = x1;
+                    stpX = x0;
+                else
+                    startX = x0;
+                    stpX = x1;
+                end
+                
+                if (y0 > y1) 
+                    startY = y1;
+                    stpY = y0;
+                else
+                    startY = y0;
+                    stpY = y1;
+                end
+                   
+                
+                for n = startX:stpX - 1
+                    if (mod(n,2) == 0) 
+                        continue;
+                    end
+                    for m = startY:stpY -1 
+                        if (mod(m,2) == 0) 
+                            continue;
+                        end
+                        
+                        x = 0.5 + n;
+                        y = 0.5 + m;
+                       if (x0 == x1 && y0 == y1)
+                           break;
+                       elseif ((x - x0)*(y1 - y0) == (y-y0)*(x1 - x0))
+                            numberOfPt = numberOfPt + 1;
+                       end
+                    end
+                end
+                for n = startX:stpX - 1
+                    if (mod(n,2) == 1)
+                        continue;
+                    end
+                    for m = startY:stpY - 1
+                        if (mod(m,2) == 1) 
+                            continue;
+                        end
+                        x = 1.5 + n;
+                        y = 1.5 + m;
+                        if (x0 == x1 && y0 == y1)
+                           break;
+                       elseif ((x - x0)*(y1 - y0) == (y-y0)*(x1 - x0))
+                            numberOfPt = numberOfPt + 1;
+                       end
+                    end
+                end
+                output(i, j + (k-1)*4) = numberOfPt;
+            end
+        end
+    end
+end
+
