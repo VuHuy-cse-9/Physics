@@ -25,16 +25,10 @@ for i=1:2:(numberOfHCoordinate(1,1))
             break;
         end
         deNan = deNan + 1;
-    end
-    
-
+    end    
 output1 = caldistance(h_coor, h, n); %output include all pair of distance and its label.
-
-%Eliminate pair that have distance > max or < min type's distance.
-
 %Count Pt.
 output2 = countPt(h_coor, n, h);
-
 %checkType
 output(count,1:7) = checkType(output1,output2,type); %Result.
 end

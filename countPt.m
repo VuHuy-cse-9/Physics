@@ -44,9 +44,11 @@ function output = countPt(h_coor, nlattice, h) %nlattice: mang thuy tinh nlattic
                 end
                 for n = ceil(startX/b):1:floor(stpX/b)
                     for m = ceil(startY/b):1:floor(stpY/b)
-                        if (round((n*1.96 - x0)*(y1-y0) - (m*1.96-y0)*(x1-x0),9) == 0)
-                            numberOfPt = numberOfPt + 1;
-                        end
+                        if ((mod(n,2) == 0 && mod(m,2) == 0) ||(mod(n,2) == 1 && mod(m,2) == 1))
+                            if (round((n*1.96 - x0)*(y1-y0) - (m*1.96-y0)*(x1-x0),9) == 0)
+                                numberOfPt = numberOfPt + 1;
+                            end
+                        end 
                     end
                 end
                 output(i, j + (k-1)*sizehcoor(1,2)) = numberOfPt;
